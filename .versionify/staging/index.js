@@ -80,7 +80,7 @@ async function startServer() {
     app.use(express.urlencoded({ extended: true }));
     app.use(cors({ origin: "*" }));
 
-    app.use("/api", mainRouter);
+    app.use("/", mainRouter);
 
     const PORT = process.env.PORT || 5000;
 

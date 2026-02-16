@@ -1,5 +1,19 @@
-exports.createRepo = (req, res) => {
-  res.send("all repos fetched");
+const { creaeRepo, createRepo } = require("../models/repos.queries");
+
+exports.createRepo = async (req, res) => {
+  const { userId, name, description, visibility } = req.body;
+
+  try {
+    if (!userId || !name) {
+      return res.status(400).json({ error: "User id or Name is required" });
+    }
+
+    const newRepo = await createRepo(userId, name, description, visibility);
+    console.log(newRepo);
+    res.json({ message: "Repo saved Successfully" });
+  } catch (e) {
+    res.status(500).json({ error: "Failed to create repository", e });
+  }
 };
 
 exports.getAllRepos = (req, res) => {
