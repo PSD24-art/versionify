@@ -14,14 +14,16 @@ const {
 const repoRouter = express.Router();
 
 repoRouter.post("/new", createRepo);
+
+repoRouter.get("/all", getAllRepos);
 repoRouter
   .route("/:id")
   .get(getRepoById)
   .put(updateRepoById)
   .delete(deleteRepoById);
-repoRouter.get("/all", getAllRepos);
+repoRouter.get("/name/:name", getRepoByName);
 repoRouter.get("/user/:id", getRepoForCurrentUser);
-repoRouter.get("/:name", getRepoByName);
+
 repoRouter.patch("/toggle/:id", vivbilityToggleById);
 
 module.exports = repoRouter;
